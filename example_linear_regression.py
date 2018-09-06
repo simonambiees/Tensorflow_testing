@@ -40,7 +40,7 @@ hypothesis = X * W + b
 # cost/loss function
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 # Minimize
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.00001)
 train = optimizer.minimize(cost)
 # launch the graph in a session
 sess = tf.Session()
