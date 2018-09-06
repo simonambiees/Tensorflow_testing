@@ -52,7 +52,7 @@ while True:
     cost_val, W_val, b_val, _ = sess.run([cost, W, b, train], feed_dict={X: [1, 2, 3, 4, 5], Y: [7, 12, 17, 22, 27]})
     if step % 20 == 0:
         print(step, "   Cost: ", cost_val, "    Weight: ", W_val, " Bias: ", b_val)
-        step += 1
+    step += 1
 
 print(sess.run(hypothesis, feed_dict={X: [5]}))
 print(sess.run(hypothesis, feed_dict={X: [10]}))
