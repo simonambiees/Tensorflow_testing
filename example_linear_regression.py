@@ -25,24 +25,33 @@ train_op =- tf.train.GradientDescentOptimizer(0.01).minimize(cost)
 
 # Build graph using TF operations
 # X and Y data
-x_train = [1, 2, 3]
-y_train = [1, 2, 3]
+# x_train = [1, 2, 3]
+# y_train = [1, 2, 3]
+
+
+# Using placeholder X and Y to input
+X = tf.placeholder(tf.float32)
+Y = tf.placeholder(tf.float32)
 
 W = tf.Variable(tf.random_normal([1]), name="weight")
 b = tf.Variable(tf.random_normal([1]), name="bias")
 # Our hypothesis XW+b
-hypothesis = x_train * W + b
+hypothesis = X * W + b
 # cost/loss function
-cost = tf.reduce_mean(tf.square(hypothesis - y_train))
+cost = tf.reduce_mean(tf.square(hypothesis - Y))
 # Minimize
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001)
 train = optimizer.minimize(cost)
 # launch the graph in a session
 sess = tf.Session()
 # Initializes global variables in the graph
 sess.run(tf.global_variables_initializer())
 # Fit the line
-for step in range(2001):
-    sess.run(train)
+for step in range(20001):
+    cost_val, W_val, b_val, _ = sess.run([cost, W, b, train], feed_dict={X: [1, 2, 3, 4, 5], Y: [7, 12, 17, 22, 27]})
     if step % 20 == 0:
-        print(step, sess.run(cost), sess.run(W), sess.run(b))
+        print(step, "   Cost: ", cost_val, "    Weight: ", W_val, " Bias: ", b_val)
+
+print(sess.run(hypothesis, feed_dict={X: [5]}))
+print(sess.run(hypothesis, feed_dict={X: [10]}))
+print(sess.run(hypothesis, feed_dict={X: [20, 30]}))
