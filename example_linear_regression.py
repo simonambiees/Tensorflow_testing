@@ -47,8 +47,9 @@ sess = tf.Session()
 # Initializes global variables in the graph
 sess.run(tf.global_variables_initializer())
 # Fit the line
+step = 1
 while True:
-    step = 1
+    
     cost_val, W_val, b_val, _ = sess.run([cost, W, b, train], feed_dict={X: [1, 2, 3, 4, 5], Y: [7, 12, 17, 22, 27]})
     if step % 20 == 0:
         print(step, "   Cost: ", cost_val, "    Weight: ", W_val, " Bias: ", b_val)
